@@ -11,7 +11,8 @@ collections:
   - name: works
     label: Work
     label_singular: Works
-    folder: /content/works
+    folder: /public/content/works
+    format: json
     fields:
       - { label: Titel, name: title, widget: string }
       - { label: Thumbnail, name: thumbnail, widget: image }
