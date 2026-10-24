@@ -22,7 +22,7 @@ collections:
         file: content/pages/about.json
         format: json
         fields:
-          - { label: Info, name: info, widget: string }
+          - { label: Info, name: info, widget: text }
           - { label: Beschreibung, name: content, widget: richtext }
           - { label: Portrait, name: portrait, widget: image, min: 1, max: 1 }
       - name: contact
@@ -42,6 +42,7 @@ collections:
     label_singular: Work
     folder: /content/works
     format: json
+    reorder: true
     fields:
       - { label: Titel, name: title, widget: string }
       - { label: Thumbnail, name: thumbnail, widget: image }
@@ -60,6 +61,7 @@ collections:
               - label: Bild
                 name: image
                 widget: image
+                multiple: true
           - label: Video
             name: video_item
             fields:
@@ -67,21 +69,26 @@ collections:
                 name: video
                 widget: file
                 accept: video/*
+                multiple: true
           - label: Dreispalter
             name: three_col
             fields:
               - label: Text Links
                 name: text_left
-                widget: string
+                widget: text
+                required: false
               - label: Text Mitte
                 name: text_middle
-                widget: string
+                widget: text
+                required: false
               - label: image
                 name: image
                 widget: image
+                required: false
       - label: Referenzen
         name: references
         widget: image
+        multiple: true
         required: false
   - name: news
     label: News
