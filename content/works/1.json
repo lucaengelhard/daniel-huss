@@ -1,10 +1,15 @@
 {
-  "title": "1",
-  "thumbnail": "https://picsum.photos/id/1052/1920/1280.webp",
-  "header": "https://picsum.photos/id/213/1920/1280.webp",
-  "info": "123123",
-  "content": "",
+  "title": "Maja",
+  "thumbnail": "/media/Untitled_1.68.1-2.jpg",
+  "header": "/media/Untitled_1.73.2-2.jpg",
+  "info": "2K | stereo | 1,66:1 | 05:58’ | 2020",
+  "content": "coming soon",
   "link": "",
-  "details": [],
+  "details": [
+    {
+      "type": "image_item",
+      "image": "/media/Untitled_1.107.1-2.jpg"
+    }
+  ],
   "references": ""
 }
