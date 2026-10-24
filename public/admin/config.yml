@@ -13,9 +13,30 @@ collections:
     files:
       - name: home
         label: Homepage
-        file: content/pages/home.md
+        file: content/pages/home.json
+        format: json
         fields:
           - { label: Hero Image, name: hero, widget: image, min: 1, max: 1 }
+      - name: about
+        label: About
+        file: content/pages/about.json
+        format: json
+        fields:
+          - { label: Info, name: info, widget: string }
+          - { label: Beschreibung, name: content, widget: richtext }
+          - { label: Portrait, name: portrait, widget: image, min: 1, max: 1 }
+      - name: contact
+        label: Contact
+        file: content/pages/contact.json
+        format: json
+        fields:
+          - { label: Content, name: content, widget: richtext }
+      - name: imprint
+        label: Impressum
+        file: content/pages/imprint.json
+        format: json
+        fields:
+          - { label: Content, name: content, widget: richtext }
   - name: works
     label: Works
     label_singular: Work
@@ -62,9 +83,46 @@ collections:
         name: references
         widget: image
         required: false
+  - name: news
+    label: News
+    folder: content/news
+    format: json
+    fields:
+      - { label: Titel, name: title, widget: string }
+      - {
+          label: Datum,
+          name: date,
+          widget: datetime,
+          type: date,
+          required: false,
+        }
+      - { label: Untertitel, name: subtitle, widget: string, required: false }
+      - {
+          label: Beschreibung,
+          name: content,
+          widget: richtext,
+          required: false,
+        }
+      - {
+          label: Bild,
+          name: image,
+          widget: image,
+          min: 1,
+          max: 1,
+          required: false,
+        }
+      - {
+          label: Video,
+          name: video,
+          widget: file,
+          accept: video/*,
+          min: 1,
+          max: 1,
+          required: false,
+        }
   - name: links
-    label: Links
-    label_singular: Link
+    label: Footer
+    label_singular: Footer Item
     folder: /content/links
     format: json
     fields:
