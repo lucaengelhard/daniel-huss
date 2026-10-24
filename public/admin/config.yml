@@ -8,9 +8,17 @@ media_folder: /public/media
 public_folder: /media
 
 collections:
+  - name: pages
+    label: Pages
+    files:
+      - name: home
+        label: Homepage
+        file: content/pages/home.md
+        fields:
+          - { label: Hero Image, name: hero, widget: image, min: 1, max: 1 }
   - name: works
-    label: Work
-    label_singular: Works
+    label: Works
+    label_singular: Work
     folder: /content/works
     format: json
     fields:
@@ -54,3 +62,17 @@ collections:
         name: references
         widget: image
         required: false
+  - name: links
+    label: Links
+    label_singular: Link
+    folder: /content/links
+    format: json
+    fields:
+      - label: Link
+        name: link
+        widget: string
+      - label: Bild
+        name: image
+        widget: image
+        max: 1
+        min: 1
