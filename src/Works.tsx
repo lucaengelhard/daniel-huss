@@ -71,6 +71,7 @@ function WorkItem({ title, thumbnail, info, slug }: WorkItem) {
 export function Work({ slug }: { slug: string }) {
   const path = `/content/works/${slug}.json`;
   const work = works[path];
+  if (!work) return "This page does not exist :(";
   return (
     <>
       <div
