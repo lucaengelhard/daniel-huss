@@ -50,7 +50,7 @@ function App() {
     <>
       <img
         ref={heroRef}
-        src={import.meta.env.BASE_URL + home.hero}
+        src={home.hero}
         style={{
           display: match ? "block" : "none",
           height: "100vh",
@@ -129,10 +129,7 @@ function App() {
             <FooterItem {...item} key={item.link} />
           ))}
           <Link href="/impressum" style={{ marginTop: "0.8rem" }}>
-            <img
-              src={import.meta.env.BASE_URL + impressum}
-              style={{ height: "1rem" }}
-            />
+            <img src={impressum} style={{ height: "1rem" }} />
           </Link>
           <div
             style={{
@@ -153,7 +150,7 @@ function App() {
 function Nav({ href, src }: { href: string; src: string }) {
   return (
     <Link href={href}>
-      <img src={import.meta.env.BASE_URL + src} style={{ height: "0.8rem" }} />
+      <img src={src} style={{ height: "0.8rem" }} />
     </Link>
   );
 }
@@ -162,7 +159,10 @@ type FooterItemProps = { image: string; link: string };
 function FooterItem({ image, link }: FooterItemProps) {
   return (
     <a href={link} target="_blank" style={{ marginTop: "0.5rem" }}>
-      <img src={import.meta.env.BASE_URL + image} style={{ height: "1rem" }} />
+      <img
+        src={`${import.meta.env.BASE_URL}${image}`}
+        style={{ height: "1rem" }}
+      />
     </a>
   );
 }

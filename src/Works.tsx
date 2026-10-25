@@ -57,7 +57,7 @@ function WorkItem({ title, thumbnail, info, slug }: WorkItem) {
       }}
     >
       <img
-        src={import.meta.env.BASE_URL + thumbnail}
+        src={`${import.meta.env.BASE_URL}${thumbnail}`}
         style={{
           width: "100%",
           height: "100%",
@@ -100,7 +100,7 @@ export function Work({ slug }: { slug: string }) {
           <Markdown>{work.content}</Markdown>
         </div>
         <img
-          src={import.meta.env.BASE_URL + work.header}
+          src={`${import.meta.env.BASE_URL}${work.header}`}
           style={{
             width: "100%",
             aspectRatio: "16/9",
@@ -135,7 +135,7 @@ function WorkDetail(props: WorkDetailProps) {
           {props.image.map((item) => (
             <div style={{ marginTop: "13rem" }} key={item}>
               <img
-                src={import.meta.env.BASE_URL + item}
+                src={`${import.meta.env.BASE_URL}${item}`}
                 style={{ width: "100%" }}
               />
             </div>
@@ -164,7 +164,7 @@ function WorkDetail(props: WorkDetailProps) {
           </div>
           {props.image !== "" && (
             <img
-              src={import.meta.env.BASE_URL + props.image}
+              src={`${import.meta.env.BASE_URL}${props.image}`}
               style={{
                 width: "100%",
                 gridRow:
@@ -182,7 +182,7 @@ function WorkDetail(props: WorkDetailProps) {
     case "video_item": {
       return (
         <video style={{ width: "100%", marginTop: "13rem" }}>
-          <source src={import.meta.env.BASE_URL + props.video} />
+          <source src={`${import.meta.env.BASE_URL}${props.video}`} />
         </video>
       );
     }

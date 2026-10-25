@@ -15,7 +15,7 @@ export function About() {
         <Markdown>{about.content}</Markdown>
       </div>
       <img
-        src={import.meta.env.BASE_URL + about.portrait}
+        src={`${import.meta.env.BASE_URL}${about.portrait}`}
         style={{ width: "100%" }}
       />
     </div>
