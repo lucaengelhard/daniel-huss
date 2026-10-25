@@ -51,7 +51,7 @@ function App() {
     <>
       <img
         ref={heroRef}
-        src={home.hero}
+        src={withBase(home.hero)}
         style={{
           display: match ? "block" : "none",
           height: "100vh",
