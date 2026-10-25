@@ -93,17 +93,12 @@ collections:
   - name: news
     label: News
     folder: content/news
+    reorder: true
     format: json
     fields:
       - { label: Titel, name: title, widget: string }
-      - {
-          label: Datum,
-          name: date,
-          widget: datetime,
-          type: date,
-          required: false,
-        }
       - { label: Untertitel, name: subtitle, widget: string, required: false }
+      - { label: Datum, name: date, widget: string, required: false }
       - {
           label: Beschreibung,
           name: content,

@@ -1,4 +1,6 @@
-import { Link, Route } from "wouter";
+import { Link, Route, useRoute } from "wouter";
+
+import { Works, Work } from "./Works";
 
 import nav_home from "./assets/Daniel_Huss.png";
 import nav_news from "./assets/NEWS.png";
@@ -6,8 +8,8 @@ import nav_works from "./assets/WORKS.png";
 import nav_about from "./assets/ABOUT.png";
 import nav_contact from "./assets/CONTACT.png";
 import impressum from "./assets/Impressum.png";
-import { Works } from "./Works";
 
+import home from "../content/pages/home.json";
 const footer_links: Record<string, FooterItemProps> = import.meta.glob(
   "/content/links/*.json",
   {
@@ -17,28 +19,47 @@ const footer_links: Record<string, FooterItemProps> = import.meta.glob(
 );
 
 function App() {
+  const [match] = useRoute("/");
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100vh",
-        justifyContent: "space-between",
-      }}
-    >
-      <main>
+    <div>
+      <img
+        src={home.hero}
+        style={{
+          display: match ? "block" : "none",
+          height: "100vh",
+          width: "100vw",
+          objectFit: "cover",
+        }}
+      />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+          justifyContent: "space-between",
+          padding: "1rem",
+          maxWidth: "1200px",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      >
         <nav
           style={{
             display: "flex",
             width: "100%",
             justifyContent: "space-between",
+            paddingTop: "2rem",
+            paddingBottom: "2rem",
+            position: "sticky",
+            top: 0,
+            background: "white",
           }}
         >
           <Nav href="/" src={nav_home} />
           <div
             style={{
               display: "flex",
-              gap: "1rem",
+              gap: "1.5rem",
             }}
           >
             <Nav href="/news" src={nav_news} />
@@ -47,21 +68,30 @@ function App() {
             <Nav href="/contact" src={nav_contact} />
           </div>
         </nav>
-      </main>
-      <div style={{ flexGrow: 1 }}>
-        <Route path={"/"}>
-          <Works />
-        </Route>
-      </div>
-      <footer style={{ display: "flex", flexDirection: "column" }}>
-        {Object.values(footer_links).map((item) => (
-          <FooterItem {...item} key={item.link} />
-        ))}
-        <Nav src={impressum} href="/impressum" />
-        <div style={{ fontSize: 10, marginTop: "3rem", marginBottom: "2rem" }}>
-          {new Date().getFullYear()} Daniel Huss. All rights reserved.
+
+        <div style={{ flexGrow: 1, maxWidth: "100vw" }}>
+          <Route path={"/"}>
+            <Works />
+          </Route>
+          <Route path={"/works"}>
+            <Works />
+          </Route>
+          <Route path={"/works/:title"}>
+            {(params) => <Work slug={params.title} />}
+          </Route>
         </div>
-      </footer>
+        <footer style={{ display: "flex", flexDirection: "column" }}>
+          {Object.values(footer_links).map((item) => (
+            <FooterItem {...item} key={item.link} />
+          ))}
+          <Nav src={impressum} href="/impressum" />
+          <div
+            style={{ fontSize: 10, marginTop: "3rem", marginBottom: "2rem" }}
+          >
+            © {new Date().getFullYear()} Daniel Huss. All rights reserved.
+          </div>
+        </footer>
+      </div>
     </div>
   );
 }
@@ -69,7 +99,7 @@ function App() {
 function Nav({ href, src }: { href: string; src: string }) {
   return (
     <Link href={href}>
-      <img src={src} style={{ height: "1rem" }} />
+      <img src={src} style={{ height: "0.8rem" }} />
     </Link>
   );
 }
