@@ -1,4 +1,4 @@
-import { Link, Route, useRoute } from "wouter";
+import { Link, Route, Switch, useRoute } from "wouter";
 
 import { Works, Work } from "./Works";
 
@@ -73,24 +73,31 @@ function App() {
         </nav>
 
         <div style={{ flexGrow: 1, maxWidth: "100vw" }}>
-          <Route path={"/"}>
-            <Works />
-          </Route>
-          <Route path={"/works"}>
-            <Works />
-          </Route>
-          <Route path={"/works/:title"}>
-            {(params) => <Work slug={params.title} />}
-          </Route>
-          <Route path="/news">
-            <News />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/contact">
-            <Contact />
-          </Route>
+          <Switch>
+            <Route path={"/"}>
+              <Works />
+            </Route>
+            <Route path={"/works"}>
+              <Works />
+            </Route>
+            <Route path={"/works/:title"}>
+              {(params) => <Work slug={params.title} />}
+            </Route>
+            <Route path="/news">
+              <News />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/contact">
+              <Contact />
+            </Route>
+            <Route>
+              This Page does not exist :(
+              <br />
+              <Link href="/">Back to Homepage</Link>
+            </Route>
+          </Switch>
         </div>
         <footer style={{ display: "flex", flexDirection: "column" }}>
           {Object.values(footer_links).map((item) => (
