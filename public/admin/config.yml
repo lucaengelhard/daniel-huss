@@ -31,12 +31,6 @@ collections:
         format: json
         fields:
           - { label: Content, name: content, widget: richtext }
-      - name: imprint
-        label: Impressum
-        file: content/pages/imprint.json
-        format: json
-        fields:
-          - { label: Content, name: content, widget: richtext }
   - name: works
     label: Works
     label_singular: Work

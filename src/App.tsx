@@ -10,6 +10,9 @@ import nav_contact from "./assets/CONTACT.png";
 import impressum from "./assets/Impressum.png";
 
 import home from "../content/pages/home.json";
+import { News } from "./News";
+import { About } from "./About";
+import { Contact } from "./Contact";
 const footer_links: Record<string, FooterItemProps> = import.meta.glob(
   "/content/links/*.json",
   {
@@ -21,7 +24,7 @@ const footer_links: Record<string, FooterItemProps> = import.meta.glob(
 function App() {
   const [match] = useRoute("/");
   return (
-    <div>
+    <>
       <img
         src={home.hero}
         style={{
@@ -79,12 +82,23 @@ function App() {
           <Route path={"/works/:title"}>
             {(params) => <Work slug={params.title} />}
           </Route>
+          <Route path="/news">
+            <News />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
         </div>
         <footer style={{ display: "flex", flexDirection: "column" }}>
           {Object.values(footer_links).map((item) => (
             <FooterItem {...item} key={item.link} />
           ))}
-          <Nav src={impressum} href="/impressum" />
+          <Link href="/impressum" style={{ marginTop: "0.8rem" }}>
+            <img src={impressum} style={{ height: "1rem" }} />
+          </Link>
           <div
             style={{ fontSize: 10, marginTop: "3rem", marginBottom: "2rem" }}
           >
@@ -92,7 +106,7 @@ function App() {
           </div>
         </footer>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -107,7 +121,7 @@ function Nav({ href, src }: { href: string; src: string }) {
 type FooterItemProps = { image: string; link: string };
 function FooterItem({ image, link }: FooterItemProps) {
   return (
-    <a href={link} target="_blank">
+    <a href={link} target="_blank" style={{ marginTop: "0.5rem" }}>
       <img src={image} style={{ height: "1rem" }} />
     </a>
   );

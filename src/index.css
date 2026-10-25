@@ -9,8 +9,15 @@
 * {
     color: #000;
     font-family: "XB_Kayhan", sans-serif;
+    font-size: 12px;
+    line-height: 16px;
+    white-space: pre-wrap;
 }
 
 body {
+    margin: 0;
+}
+
+p {
     margin: 0;
 }

@@ -73,7 +73,14 @@ export function Work({ slug }: { slug: string }) {
   const work = works[path];
   return (
     <>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          marginTop: "1rem",
+          gap: "5rem",
+        }}
+      >
         <div>
           <div>{work.title}</div>
           <div>{work.info}</div>
@@ -87,7 +94,7 @@ export function Work({ slug }: { slug: string }) {
         />
       </div>
       {work.details.map((item) => (
-        <WorkDetail {...item} />
+        <WorkDetail {...item} key={JSON.stringify(item)} />
       ))}
     </>
   );
@@ -108,14 +115,23 @@ function WorkDetail(props: WorkDetailProps) {
       return (
         <>
           {props.image.map((item) => (
-            <img src={item} style={{ width: "100%" }} />
+            <div style={{ marginTop: "13rem" }} key={item}>
+              <img src={item} style={{ width: "100%" }} />
+            </div>
           ))}
         </>
       );
     }
     case "three_col": {
       return (
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr",
+            marginTop: "13rem",
+            gap: "5rem",
+          }}
+        >
           <div>{props.text_left}</div>
           <div>{props.text_middle}</div>
           {props.image !== "" && (
@@ -126,7 +142,7 @@ function WorkDetail(props: WorkDetailProps) {
     }
     case "video_item": {
       return (
-        <video style={{ width: "100%" }}>
+        <video style={{ width: "100%", marginTop: "13rem" }}>
           <source src={props.video} />
         </video>
       );
