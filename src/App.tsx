@@ -27,6 +27,23 @@ function App() {
   const heroRef = useRef<HTMLImageElement>(null);
   useEffect(() => {
     const img = heroRef.current;
+    if (!img) return;
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        const res = entries.find((e) => !e.isIntersecting);
+        if (res) {
+          img.style.display = "none";
+          observer.disconnect();
+        }
+      },
+      { root: null },
+    );
+
+    if (match) {
+      observer.observe(img);
+    } else {
+      observer.disconnect();
+    }
   }, [match]);
 
   return (
