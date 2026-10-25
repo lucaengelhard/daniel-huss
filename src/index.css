@@ -11,7 +11,6 @@
     font-family: "XB_Kayhan", sans-serif;
     font-size: 12px;
     line-height: 16px;
-    white-space: pre-wrap;
 }
 
 body {
@@ -20,4 +19,8 @@ body {
 
 p {
     margin: 0;
+}
+
+div {
+    white-space: pre-wrap;
 }

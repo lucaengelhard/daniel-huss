@@ -9,10 +9,11 @@ import nav_about from "./assets/ABOUT.png";
 import nav_contact from "./assets/CONTACT.png";
 import impressum from "./assets/Impressum.png";
 
-import home from "../content/pages/home.json";
+import home from "../content/pages/home.json" with { type: "json" };
 import { News } from "./News";
 import { About } from "./About";
 import { Contact } from "./Contact";
+import { useEffect, useRef } from "react";
 const footer_links: Record<string, FooterItemProps> = import.meta.glob(
   "/content/links/*.json",
   {
@@ -23,9 +24,15 @@ const footer_links: Record<string, FooterItemProps> = import.meta.glob(
 
 function App() {
   const [match] = useRoute("/");
+  const heroRef = useRef<HTMLImageElement>(null);
+  useEffect(() => {
+    const img = heroRef.current;
+  }, [match]);
+
   return (
     <>
       <img
+        ref={heroRef}
         src={home.hero}
         style={{
           display: match ? "block" : "none",
@@ -53,6 +60,7 @@ function App() {
             justifyContent: "space-between",
             paddingTop: "2rem",
             paddingBottom: "2rem",
+            marginBottom: "10rem",
             position: "sticky",
             top: 0,
             background: "white",
@@ -107,7 +115,12 @@ function App() {
             <img src={impressum} style={{ height: "1rem" }} />
           </Link>
           <div
-            style={{ fontSize: 10, marginTop: "3rem", marginBottom: "2rem" }}
+            style={{
+              fontSize: 10,
+              marginTop: "3rem",
+              marginBottom: "2rem",
+              color: "gray",
+            }}
           >
             © {new Date().getFullYear()} Daniel Huss. All rights reserved.
           </div>
