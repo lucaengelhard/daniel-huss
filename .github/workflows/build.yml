@@ -34,9 +34,10 @@ jobs:
           git fetch origin gh-pages
           git checkout gh-pages
 
-          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name dist -exec rm -rf {} +
 
           cp -r dist/. .
+          rm -rf dist
 
           git add .
           git commit -m "Deploy build from ${GITHUB_SHA}" || exit 0
