@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { getSlug } from "./lib/path";
+import { getSlug, withBase } from "./lib/path";
 import Markdown from "react-markdown";
 import { useContext } from "react";
 import { WindowsizeContext } from "./lib/hooks";
@@ -57,7 +57,7 @@ function WorkItem({ title, thumbnail, info, slug }: WorkItem) {
       }}
     >
       <img
-        src={`${import.meta.env.BASE_URL}${thumbnail}`}
+        src={withBase(thumbnail)}
         style={{
           width: "100%",
           height: "100%",
@@ -134,10 +134,7 @@ function WorkDetail(props: WorkDetailProps) {
         <>
           {props.image.map((item) => (
             <div style={{ marginTop: "13rem" }} key={item}>
-              <img
-                src={`${import.meta.env.BASE_URL}${item}`}
-                style={{ width: "100%" }}
-              />
+              <img src={withBase(item)} style={{ width: "100%" }} />
             </div>
           ))}
         </>
@@ -164,7 +161,7 @@ function WorkDetail(props: WorkDetailProps) {
           </div>
           {props.image !== "" && (
             <img
-              src={`${import.meta.env.BASE_URL}${props.image}`}
+              src={withBase(props.image)}
               style={{
                 width: "100%",
                 gridRow:
@@ -182,7 +179,7 @@ function WorkDetail(props: WorkDetailProps) {
     case "video_item": {
       return (
         <video style={{ width: "100%", marginTop: "13rem" }}>
-          <source src={`${import.meta.env.BASE_URL}${props.video}`} />
+          <source src={withBase(props.video)} />
         </video>
       );
     }

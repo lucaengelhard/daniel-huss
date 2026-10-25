@@ -14,6 +14,7 @@ import { News } from "./News";
 import { About } from "./About";
 import { Contact } from "./Contact";
 import { useEffect, useRef } from "react";
+import { withBase } from "./lib/path";
 const footer_links: Record<string, FooterItemProps> = import.meta.glob(
   "/content/links/*.json",
   {
@@ -159,10 +160,7 @@ type FooterItemProps = { image: string; link: string };
 function FooterItem({ image, link }: FooterItemProps) {
   return (
     <a href={link} target="_blank" style={{ marginTop: "0.5rem" }}>
-      <img
-        src={`${import.meta.env.BASE_URL}${image}`}
-        style={{ height: "1rem" }}
-      />
+      <img src={withBase(image)} style={{ height: "1rem" }} />
     </a>
   );
 }

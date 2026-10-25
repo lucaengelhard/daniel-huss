@@ -4,10 +4,11 @@ import "./index.css";
 import App from "./App.tsx";
 import { WindowsizeContextProvider } from "./lib/hooks.tsx";
 import { Router } from "wouter";
+import { BASE } from "./lib/path.ts";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Router base={import.meta.env.BASE_URL}>
+    <Router base={BASE}>
       <WindowsizeContextProvider>
         <App />
       </WindowsizeContextProvider>

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Markdown from "react-markdown";
 import { WindowsizeContext } from "./lib/hooks";
+import { withBase } from "./lib/path";
 
 type NewsItem = {
   title: string;
@@ -64,13 +65,13 @@ function NewsItem({ title, subtitle, date, content, image, video }: NewsItem) {
               windowsize < 700 ? "1" : windowsize < 1000 ? "1 / 3" : undefined,
           }}
         >
-          <source src={`${import.meta.env.BASE_URL}${video}`} />
+          <source src={withBase(video)} />
         </video>
       ) : (
         image &&
         image !== "" && (
           <img
-            src={`${import.meta.env.BASE_URL}${image}`}
+            src={withBase(image)}
             style={{
               width: "100%",
               aspectRatio: "3 / 2",

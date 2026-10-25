@@ -1,5 +1,6 @@
 import Markdown from "react-markdown";
 import about from "../content/pages/about.json" with { type: "json" };
+import { withBase } from "./lib/path";
 
 export function About() {
   return (
@@ -14,10 +15,7 @@ export function About() {
       <div>
         <Markdown>{about.content}</Markdown>
       </div>
-      <img
-        src={`${import.meta.env.BASE_URL}${about.portrait}`}
-        style={{ width: "100%" }}
-      />
+      <img src={withBase(about.portrait)} style={{ width: "100%" }} />
     </div>
   );
 }
