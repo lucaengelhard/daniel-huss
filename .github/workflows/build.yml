@@ -18,11 +18,22 @@ jobs:
           version: 11
           runtime: node@22
           cache: true
-
-      - name: Run a multi-line script
+      - name: Build
+        run: pnpm build
+      - name: Check for Changes
+        id: check_changes
         run: |
-          pnpm build
-          git config user.name build-bot
+          if [[ -n "$(git diff --exit-code)" ]]; then
+            echo "Changes detected."
+            echo "::set-output name=has_changes::true"
+          else
+            echo "No changes detected."
+            echo "::set-output name=has_changes::false"
+          fi
+      - name: Push
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git add -f dist
           git commit -am "[BOT] New version built"
           git push origin main
