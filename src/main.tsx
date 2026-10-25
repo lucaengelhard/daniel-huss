@@ -3,11 +3,14 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
 import { WindowsizeContextProvider } from "./lib/hooks.tsx";
+import { Router } from "wouter";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <WindowsizeContextProvider>
-      <App />
-    </WindowsizeContextProvider>
+    <Router base={import.meta.env.BASE_URL}>
+      <WindowsizeContextProvider>
+        <App />
+      </WindowsizeContextProvider>
+    </Router>
   </StrictMode>,
 );
