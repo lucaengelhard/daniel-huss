@@ -1,6 +1,8 @@
 import { Link } from "wouter";
 import { getSlug } from "./lib/path";
 import Markdown from "react-markdown";
+import { useContext } from "react";
+import { WindowsizeContext } from "./lib/hooks";
 
 type WorkItem = {
   title: string;
@@ -23,12 +25,13 @@ const works: Record<string, Omit<WorkItem, "slug">> = import.meta.glob(
 );
 
 export function Works() {
+  const windowsize = useContext(WindowsizeContext);
   return (
     <div
       style={{
         display: "grid",
         width: "100%",
-        gridTemplateColumns: "1fr 1fr",
+        gridTemplateColumns: windowsize >= 700 ? "1fr 1fr" : "1fr",
         columnGap: "3rem",
         rowGap: "4rem",
         marginBottom: "20rem",
@@ -69,6 +72,8 @@ function WorkItem({ title, thumbnail, info, slug }: WorkItem) {
 }
 
 export function Work({ slug }: { slug: string }) {
+  const windowsize = useContext(WindowsizeContext);
+
   const path = `/content/works/${slug}.json`;
   const work = works[path];
   if (!work) return "This page does not exist :(";
@@ -77,7 +82,12 @@ export function Work({ slug }: { slug: string }) {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
+          gridTemplateColumns:
+            windowsize >= 1000
+              ? "1fr 1fr 1fr"
+              : windowsize >= 700
+                ? "1fr 1fr"
+                : "1fr",
           marginTop: "1rem",
           gap: "5rem",
         }}
@@ -86,12 +96,18 @@ export function Work({ slug }: { slug: string }) {
           <div>{work.title}</div>
           <div>{work.info}</div>
         </div>
-        <div>
+        <div style={{ gridRow: windowsize < 1000 ? 2 : undefined }}>
           <Markdown>{work.content}</Markdown>
         </div>
         <img
           src={work.header}
-          style={{ width: "100%", aspectRatio: "16/9", objectFit: "cover" }}
+          style={{
+            width: "100%",
+            aspectRatio: "16/9",
+            objectFit: "cover",
+            gridRow:
+              windowsize < 700 ? "1" : windowsize < 1000 ? "1 / 3" : undefined,
+          }}
         />
       </div>
       {work.details.map((item) => (
@@ -111,6 +127,7 @@ type WorkDetailProps =
     }
   | { type: "video_item"; video: string };
 function WorkDetail(props: WorkDetailProps) {
+  const windowsize = useContext(WindowsizeContext);
   switch (props.type) {
     case "image_item": {
       return (
@@ -128,15 +145,33 @@ function WorkDetail(props: WorkDetailProps) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr",
+            gridTemplateColumns:
+              windowsize >= 1000
+                ? "1fr 1fr 1fr"
+                : windowsize >= 700
+                  ? "1fr 1fr"
+                  : "1fr",
             marginTop: "13rem",
             gap: "5rem",
           }}
         >
           <div>{props.text_left}</div>
-          <div>{props.text_middle}</div>
+          <div style={{ gridRow: windowsize < 1000 ? 2 : undefined }}>
+            {props.text_middle}
+          </div>
           {props.image !== "" && (
-            <img src={props.image} style={{ width: "100%" }} />
+            <img
+              src={props.image}
+              style={{
+                width: "100%",
+                gridRow:
+                  windowsize < 700
+                    ? "1"
+                    : windowsize < 1000
+                      ? "1 / 3"
+                      : undefined,
+              }}
+            />
           )}
         </div>
       );

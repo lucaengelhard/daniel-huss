@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import Markdown from "react-markdown";
+import { WindowsizeContext } from "./lib/hooks";
 
 type NewsItem = {
   title: string;
@@ -29,11 +31,17 @@ export function News() {
 }
 
 function NewsItem({ title, subtitle, date, content, image, video }: NewsItem) {
+  const windowsize = useContext(WindowsizeContext);
   return (
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "1.2fr 1.2fr 2fr",
+        gridTemplateColumns:
+          windowsize < 700
+            ? "1fr"
+            : windowsize < 1000
+              ? "1fr 1fr"
+              : "1.2fr 1.2fr 2fr",
         marginTop: "1rem",
         gap: "5rem",
         paddingTop: "9rem",
@@ -45,17 +53,35 @@ function NewsItem({ title, subtitle, date, content, image, video }: NewsItem) {
         <div>{subtitle}</div>
         <div style={{ marginTop: "1rem" }}>{date}</div>
       </div>
-      <div>
+      <div style={{ gridRow: windowsize < 1000 ? 2 : undefined }}>
         <Markdown>{content}</Markdown>
       </div>
       {video && video !== "" ? (
-        <video style={{ width: "100%" }}>
+        <video
+          style={{
+            width: "100%",
+            gridRow:
+              windowsize < 700 ? "1" : windowsize < 1000 ? "1 / 3" : undefined,
+          }}
+        >
           <source src={video} />
         </video>
       ) : (
         image &&
         image !== "" && (
-          <img src={image} style={{ width: "100%", aspectRatio: "3 / 2" }} />
+          <img
+            src={image}
+            style={{
+              width: "100%",
+              aspectRatio: "3 / 2",
+              gridRow:
+                windowsize < 700
+                  ? "1"
+                  : windowsize < 1000
+                    ? "1 / 3"
+                    : undefined,
+            }}
+          />
         )
       )}
     </div>

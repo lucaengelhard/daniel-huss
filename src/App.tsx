@@ -64,7 +64,7 @@ function App() {
           flexDirection: "column",
           minHeight: "100vh",
           justifyContent: "space-between",
-          padding: "1rem",
+          padding: "1.5rem",
           maxWidth: "1200px",
           marginLeft: "auto",
           marginRight: "auto",
