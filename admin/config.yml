@@ -8,6 +8,7 @@ backend:
 
 media_folder: /public/media
 public_folder: /media
+site_url: https://lucaengelhard.github.io/daniel-huss
 
 collections:
   - name: pages
