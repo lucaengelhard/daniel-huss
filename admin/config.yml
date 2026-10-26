@@ -3,6 +3,8 @@
 backend:
   name: github
   repo: lucaengelhard/daniel-huss
+  auth_methods:
+    - token
 
 media_folder: /public/media
 public_folder: /media
